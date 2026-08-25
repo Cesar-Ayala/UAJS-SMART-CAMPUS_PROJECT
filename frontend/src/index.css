@@ -1,0 +1,64 @@
+:root {
+  --color-primary: #0b2e59;      /* azul institucional UNIAJS */
+  --color-primary-light: #14468a;
+  --color-accent: #f2a71b;       /* dorado de acento */
+  --color-bg: #f5f7fa;
+  --color-surface: #ffffff;
+  --color-text: #1c2530;
+  --color-text-muted: #5b6b7c;
+  --color-border: #e1e6ec;
+  --color-success: #1f8a4c;
+  --color-warning: #b8860b;
+  --color-danger: #b3261e;
+  --radius: 10px;
+  --shadow: 0 2px 10px rgba(11, 46, 89, 0.08);
+  --font-base: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-base);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; margin: 0; padding: 0; }
+button { font-family: inherit; cursor: pointer; }
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app__main {
+  flex: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+
+.page__title {
+  font-size: 1.6rem;
+  color: var(--color-primary);
+  margin-bottom: 6px;
+}
+
+.page__subtitle {
+  color: var(--color-text-muted);
+  margin-bottom: 24px;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}

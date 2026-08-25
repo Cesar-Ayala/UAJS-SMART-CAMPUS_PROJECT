@@ -1,0 +1,22 @@
+.status-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin-top: 12px;
+}
+
+.status-flow__step {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #eceff3;
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+}
+
+.status-flow__step--done {
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+}

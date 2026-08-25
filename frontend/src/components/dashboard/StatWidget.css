@@ -1,0 +1,27 @@
+.stat-widget {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.stat-widget__icon {
+  font-size: 1.6rem;
+}
+
+.stat-widget__value {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.stat-widget__label {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
