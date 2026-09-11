@@ -2,16 +2,19 @@
   "name": "uajs-smart-campus-backend",
   "private": true,
   "version": "0.1.0",
-  "type": "module",
+  "workspaces": [
+    "api-gateway",
+    "services/users-service",
+    "services/requests-service",
+    "services/reservations-service",
+    "services/resources-service",
+    "services/events-service",
+    "services/notifications-service"
+  ],
   "scripts": {
-    "dev": "node --watch server.js",
-    "start": "node server.js"
+    "dev": "concurrently -n gateway,users,requests,reservations,resources,events,notif -c blue,green,yellow,magenta,cyan,white,red \"npm run dev --workspace=api-gateway\" \"npm run dev --workspace=services/users-service\" \"npm run dev --workspace=services/requests-service\" \"npm run dev --workspace=services/reservations-service\" \"npm run dev --workspace=services/resources-service\" \"npm run dev --workspace=services/events-service\" \"npm run dev --workspace=services/notifications-service\""
   },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.11.3"
+  "devDependencies": {
+    "concurrently": "^9.0.1"
   }
 }

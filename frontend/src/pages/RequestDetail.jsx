@@ -12,7 +12,7 @@ export default function RequestDetail() {
 
   if (loading) return <Loader label="Cargando solicitud..." />
 
-  const request = requests.find((r) => r.id === id)
+  const request = requests.find((r) => String(r.id) === String(id))
   if (!request) return <p>Solicitud no encontrada. <Link to="/solicitudes">Volver</Link></p>
 
   const currentIndex = requestStatusFlow.indexOf(request.estado)

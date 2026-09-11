@@ -98,4 +98,16 @@ ON DUPLICATE KEY UPDATE nombre = VALUES(nombre);
 INSERT INTO recursos (codigo, nombre, tipo, ubicacion, disponible) VALUES
   ('REC-001', 'Laboratorio de Redes', 'Laboratorio', 'Bloque B - Piso 2', TRUE),
   ('REC-002', 'Sala de juntas B3', 'Sala', 'Bloque B - Piso 3', TRUE),
-  ('REC-003', 'Videobeam portátil', 'Equipo', 'Almacén general', FALSE);
+  ('REC-003', 'Videobeam portátil', 'Equipo', 'Almacén general', FALSE)
+ON DUPLICATE KEY UPDATE nombre = VALUES(nombre);
+
+-- Usuarios de prueba (uno por cada rol) para el login.
+-- Contraseñas en texto plano (SOLO para pruebas):
+--   estudiante@uajs.edu.co / estudiante123
+--   docente@uajs.edu.co    / docente123
+--   admin@uajs.edu.co      / admin123
+INSERT INTO usuarios (nombre, correo, password_hash, rol, programa) VALUES
+  ('Ana María Torres', 'estudiante@uajs.edu.co', '2e63a1090735f47213fea3b974418e3e42437325f313b3d3d2f6238cc22298f9', 'estudiante', 'Ingeniería de Sistemas'),
+  ('Carlos Pérez Ruiz', 'docente@uajs.edu.co', '9228105f4ea40ae4b70fde55ee2caf4495c1f188333c41ef566417ab04819f56', 'docente', 'Facultad de Ingeniería'),
+  ('Sistema UAJS', 'admin@uajs.edu.co', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 'admin', 'Tecnología e Informática')
+ON DUPLICATE KEY UPDATE nombre = VALUES(nombre);

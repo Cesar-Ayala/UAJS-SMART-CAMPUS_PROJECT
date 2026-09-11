@@ -1,16 +1,21 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useUser } from '../../context/UserContext.jsx'
 import './Navbar.css'
 
 const LINKS = [
   { to: '/inicio', label: 'Inicio' },
-  { to: '/solicitudes', label: 'Solicitudes' },
-  { to: '/reservas', label: 'Reservas' },
-  { to: '/eventos', label: 'Eventos' },
-  { to: '/notificaciones', label: 'Notificaciones' },
-  { to: '/perfil', label: 'Perfil' }
+  { to: '/notificaciones', label: 'Notificaciones' }
 ]
 
 export default function Navbar() {
+  const navigate = useNavigate()
+  const { user, logout } = useUser()
+
+  const handleLogout = () => {
+    logout()
+    navigate('/')
+  }
+
   return (
     <header className="navbar">
       <NavLink to="/inicio" className="navbar__brand">
@@ -28,6 +33,10 @@ export default function Navbar() {
             {link.label}
           </NavLink>
         ))}
+        <span className="navbar__user">{user?.nombre}</span>
+        <button type="button" className="navbar__logout" onClick={handleLogout}>
+          Cerrar sesión
+        </button>
       </nav>
     </header>
   )

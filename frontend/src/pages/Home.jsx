@@ -1,4 +1,3 @@
-import { useMemo, useState } from 'react'
 import useFetch from '../hooks/useFetch.js'
 import { endpoints } from '../api/client.js'
 import {
@@ -8,27 +7,19 @@ import {
   mockNotifications,
   mockEvents
 } from '../data/mockData.js'
-import SearchBar from '../components/common/SearchBar.jsx'
 import ServiceCard from '../components/cards/ServiceCard.jsx'
 import DashboardPanel from '../components/dashboard/DashboardPanel.jsx'
 import Loader from '../components/common/Loader.jsx'
 
 export default function Home() {
-  const [query, setQuery] = useState('')
+  // El catálogo de "servicios" (tarjetas del panel) es un dato de UI local,
+  // no proviene de un microservicio: no es uno de los 6 exigidos en el Entregable 1.
+  const services = mockServices
 
-  const { data: services, loading } = useFetch(endpoints.services, mockServices, [])
-  const { data: requests } = useFetch(endpoints.requests, mockRequests, [])
+  const { data: requests, loading } = useFetch(endpoints.requests, mockRequests, [])
   const { data: reservations } = useFetch(endpoints.reservations, mockReservations, [])
   const { data: notifications } = useFetch(endpoints.notifications, mockNotifications, [])
   const { data: events } = useFetch(endpoints.events, mockEvents, [])
-
-  const filteredServices = useMemo(() => {
-    if (!query) return services
-    const q = query.toLowerCase()
-    return services.filter(
-      (s) => s.nombre.toLowerCase().includes(q) || s.categoria.toLowerCase().includes(q)
-    )
-  }, [services, query])
 
   return (
     <div>
@@ -44,13 +35,12 @@ export default function Home() {
 
 
       {loading ? (
-        <Loader label="Cargando servicios..." />
+        <Loader label="Cargando..." />
       ) : (
         <div className="grid">
-          {filteredServices.map((service) => (
+          {services.map((service) => (
             <ServiceCard key={service.id} service={service} />
           ))}
-          {filteredServices.length === 0 && <p>No se encontraron servicios para "{query}".</p>}
         </div>
       )}
     </div>
