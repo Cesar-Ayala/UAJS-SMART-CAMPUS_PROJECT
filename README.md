@@ -10,7 +10,7 @@ Antonio José de Sucre (UAJS).
 ## Integrante
 
 | Nombre | Rol |
-
+|---|---|
 | Cesar Ayala | Arquitectura, Frontend y Microservicios |
 
 | Willinton Benavides | Backend |
@@ -157,4 +157,3 @@ http://localhost:4006/health       → notifications-service
 - Comunicación avanzada entre microservicios (mensajería asíncrona).
 - Separación de bases de datos por microservicio.
 - Contenerización con Docker y despliegue (Vercel / Railway / Render).
-- Videomemoria del proyecto.
