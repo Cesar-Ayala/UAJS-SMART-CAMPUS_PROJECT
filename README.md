@@ -11,7 +11,8 @@ Antonio José de Sucre (UAJS).
 
 | Nombre | Rol |
 | Cesar Ayala | Arquitectura, Frontend y Microservicios |
-| Willinton Benavides|Backend|
+
+| Willinton Benavides |Backend |
 
 
 
