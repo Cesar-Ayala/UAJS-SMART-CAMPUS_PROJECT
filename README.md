@@ -31,7 +31,7 @@ mysql -u root -p < backend/database/schema.sql
 ### 2. Backend
 ```bash
 cd backend
-cp .env.example .env   # y edita tus credenciales de MySQL
+cp .env.example .env   # edita credenciales de MySQL
 npm install
 npm run dev             # http://localhost:4000
 ```
