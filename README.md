@@ -20,7 +20,7 @@ Antonio José de Sucre (UAJS).
 ## Enlaces
 
 - **Repositorio:** https://github.com/Cesar-Ayala/UAJS-SMART-CAMPUS_PROJECT
-- **Tablero ClickUp:** "https://app.clickup.com/90171490354/v/f/901710754544"
+- **Tablero ClickUp:** https://app.clickup.com/90171490354/v/f/901710754544
 
 ## Arquitectura
 
