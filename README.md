@@ -21,6 +21,20 @@ Antonio José de Sucre (UAJS).
 - **Repositorio:** https://github.com/Cesar-Ayala/UAJS-SMART-CAMPUS_PROJECT
 - **Tablero ClickUp:** https://app.clickup.com/90171490354/v/f/901710754544
 
+## Integrantes
+
+| Nombre | Rol |
+|---|---|
+| Cesar Ayala | Arquitectura, Frontend y Microservicios |
+| Willinton Benavides | Backend, Documentacion y Correcciones |
+
+
+
+## Enlaces
+
+- **Repositorio:** https://github.com/Cesar-Ayala/UAJS-SMART-CAMPUS_PROJECT
+- **Tablero ClickUp:** https://app.clickup.com/90171490354/v/f/901710754544
+
 ## Arquitectura
 
 ```
@@ -150,9 +164,10 @@ http://localhost:4006/health       → notifications-service
 
 ## Integraciones funcionales verificadas
 
-- **Frontend → API Gateway → requests-service**: registro y consulta de solicitudes.
-- **Frontend → API Gateway → reservations-service**: consulta y creación de reservas.
-- Persistencia y operaciones CRUD completas sobre todos los recursos.
-- Comunicación avanzada entre microservicios (mensajería asíncrona).
-- Separación de bases de datos por microservicio.
-- Contenerización con Docker y despliegue (Vercel / Railway / Render).
+1. Conectar cada modelo del backend a las tablas reales de `schema.sql`.
+2. Implementar JWT en `middlewares/auth.js` (ya viene el esqueleto).
+3. Sustituir `frontend/src/data/mockData.js` por llamadas reales una vez el backend
+   esté desplegado.
+4. Desplegar frontend en Vercel y backend en Railway/Render.
+5. (Fase 2 - Sistemas Distribuidos) separar cada dominio en un microservicio propio
+   detrás de un API Gateway.

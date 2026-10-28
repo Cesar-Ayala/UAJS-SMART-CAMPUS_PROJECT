@@ -1,0 +1,99 @@
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Banner de Bienvenida */
+.welcome-banner {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #2563eb 100%);
+  border-radius: 20px;
+  padding: 36px 40px;
+  color: #ffffff;
+  margin-bottom: 32px;
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-banner__badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  padding: 4px 12px;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.welcome-banner__title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.welcome-banner__subtitle {
+  font-size: 1.05rem;
+  color: #cbd5e1;
+  margin: 0;
+  max-width: 650px;
+  line-height: 1.5;
+}
+
+/* Encabezados de Sección */
+.section-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 16px;
+}
+
+.dashboard-section {
+  margin-bottom: 36px;
+}
+
+.services-section {
+  margin-top: 24px;
+}
+
+.services-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.services-count {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #2563eb;
+  background-color: #eff6ff;
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+/* Grid de Servicios */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .welcome-banner {
+    padding: 24px;
+  }
+  .welcome-banner__title {
+    font-size: 1.75rem;
+  }
+  .welcome-banner__subtitle {
+    font-size: 0.95rem;
+  }
+}

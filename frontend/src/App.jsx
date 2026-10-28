@@ -3,6 +3,7 @@ import { UserProvider } from './context/UserContext.jsx'
 import RequireAuth from './components/RequireAuth.jsx'
 import Navbar from './components/layout/Navbar.jsx'
 import Footer from './components/layout/Footer.jsx'
+import Landing from './pages/Landing.jsx'
 import Login from './pages/Login.jsx'
 import Home from './pages/Home.jsx'
 import ServiceDetail from './pages/ServiceDetail.jsx'
@@ -37,8 +38,11 @@ export default function App() {
   return (
     <UserProvider>
       <Routes>
-        {/* Pantalla de acceso: login real contra el backend */}
-        <Route path="/" element={<Login />} />
+        {/* Vista de acceso: landing institucional con redirección a los 5 s */}
+        <Route path="/" element={<Landing />} />
+
+        {/* Inicio de sesión real contra el backend */}
+        <Route path="/login" element={<Login />} />
 
         {/* Vistas internas de la plataforma (requieren sesión iniciada) */}
         <Route path="/inicio" element={<Protected><Home /></Protected>} />

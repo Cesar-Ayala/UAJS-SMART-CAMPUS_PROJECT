@@ -3,6 +3,8 @@ import dotenv from 'dotenv'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { checkConnection } from '../../shared/db.js'
+import { errorHandler, notFoundHandler } from '../../shared/http.js'
+import { authenticate } from '../../shared/auth.js'
 import resourceRoutes from './src/routes/resourceRoutes.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -15,9 +17,10 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', service: 'resources-service' })
 })
 
-app.use('/api/resources', resourceRoutes)
+app.use('/api/resources', authenticate, resourceRoutes)
 
-app.use((req, res) => res.status(404).json({ message: 'Ruta no encontrada en resources-service.' }))
+app.use(notFoundHandler('resources-service'))
+app.use(errorHandler('resources-service'))
 
 const PORT = process.env.RESOURCES_PORT || 4004
 

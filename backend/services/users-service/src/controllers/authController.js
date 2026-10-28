@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken'
-import crypto from 'node:crypto'
 import { UserModel } from '../models/userModel.js'
-
-function hashPassword(password) {
-  return crypto.createHash('sha256').update(password).digest('hex')
-}
+import { asyncHandler } from '../../../../shared/http.js'
+import { conflict, forbidden, notFound, unauthorized } from '../../../../shared/errors.js'
+import { validate } from '../../../../shared/validate.js'
+import { hashPassword, verifyPassword } from '../utils/password.js'
+import { passwordRule, userRules } from '../validation/userRules.js'
 
 function signToken(user) {
   return jwt.sign(
@@ -15,47 +15,45 @@ function signToken(user) {
 }
 
 export const AuthController = {
-  async register(req, res) {
-    try {
-      const { nombre, correo, password, rol, programa } = req.body
-      const existing = await UserModel.findByEmail(correo)
-      if (existing) return res.status(409).json({ message: 'El correo ya está registrado.' })
+  register: asyncHandler(async (req, res) => {
+    const data = validate(req.body, { ...userRules, password: passwordRule })
 
-      const user = await UserModel.create({
-        nombre,
-        correo,
-        password_hash: hashPassword(password),
-        rol,
-        programa
-      })
-      const token = signToken(user)
-      res.status(201).json({ user, token })
-    } catch (error) {
-      res.status(400).json({ message: 'Error al registrar el usuario.', error: error.message })
+    if (await UserModel.findByEmail(data.correo)) {
+      throw conflict('El correo ya está registrado.', 'DUPLICATE_ENTRY')
     }
-  },
 
-  async login(req, res) {
-    try {
-      const { correo, password } = req.body
-      const user = await UserModel.findByEmail(correo)
-      if (!user || user.password_hash !== hashPassword(password)) {
-        return res.status(401).json({ message: 'Credenciales inválidas.' })
-      }
-      const token = signToken(user)
-      delete user.password_hash
-      res.json({ user, token })
-    } catch (error) {
-      res.status(400).json({ message: 'Error al iniciar sesión.', error: error.message })
-    }
-  },
+    // El registro público SIEMPRE crea estudiantes. El rol nunca se toma del
+    // cuerpo de la petición: de lo contrario cualquiera podría registrarse como admin.
+    // Los demás roles los asigna un administrador.
+    const user = await UserModel.create({
+      nombre: data.nombre,
+      correo: data.correo,
+      password_hash: await hashPassword(data.password),
+      rol: 'estudiante',
+      programa: data.programa
+    })
+    res.status(201).json({ user, token: signToken(user) })
+  }),
 
-  async me(req, res) {
-    try {
-      const user = await UserModel.findById(req.user.id)
-      res.json(user)
-    } catch (error) {
-      res.status(400).json({ message: 'Error al consultar el perfil.', error: error.message })
-    }
-  }
+  login: asyncHandler(async (req, res) => {
+    // El correo se recorta y pasa a minúsculas; la contraseña se usa tal cual.
+    const { correo, password } = validate(req.body, {
+      correo: { type: 'string', required: true, label: 'El correo' },
+      password: { type: 'secret', required: true, label: 'La contraseña' }
+    })
+
+    const user = await UserModel.findByEmail(correo.toLowerCase())
+    const passwordOk = await verifyPassword(password, user?.password_hash)
+    if (!user || !passwordOk) throw unauthorized('Credenciales inválidas.', 'INVALID_CREDENTIALS')
+    if (!user.activo) throw forbidden('La cuenta está desactivada.', 'ACCOUNT_DISABLED')
+
+    delete user.password_hash
+    res.json({ user, token: signToken(user) })
+  }),
+
+  me: asyncHandler(async (req, res) => {
+    const user = await UserModel.findById(req.user.id)
+    if (!user) throw notFound('Usuario no encontrado.', 'USER_NOT_FOUND')
+    res.json(user)
+  })
 }

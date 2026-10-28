@@ -63,7 +63,8 @@ Object.entries(SERVICES).forEach(([routePrefix, target]) => {
 
           if (!res.headersSent) {
             res.status(502).json({
-              message: `El servicio detrás de ${routePrefix} no responde.`
+              message: `El servicio detrás de ${routePrefix} no responde.`,
+              code: 'SERVICE_UNAVAILABLE'
             })
           }
         }
@@ -90,7 +91,8 @@ app.get('/api/health', (req, res) => {
 
 app.use((req, res) => {
   res.status(404).json({
-    message: 'Ruta no reconocida por el API Gateway.'
+    message: 'Ruta no reconocida por el API Gateway.',
+    code: 'ROUTE_NOT_FOUND'
   })
 })
 

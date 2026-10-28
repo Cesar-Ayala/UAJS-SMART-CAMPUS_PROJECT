@@ -3,6 +3,8 @@ import dotenv from 'dotenv'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { checkConnection } from '../../shared/db.js'
+import { errorHandler, notFoundHandler } from '../../shared/http.js'
+import { authenticate } from '../../shared/auth.js'
 import notificationRoutes from './src/routes/notificationRoutes.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -15,9 +17,10 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', service: 'notifications-service' })
 })
 
-app.use('/api/notifications', notificationRoutes)
+app.use('/api/notifications', authenticate, notificationRoutes)
 
-app.use((req, res) => res.status(404).json({ message: 'Ruta no encontrada en notifications-service.' }))
+app.use(notFoundHandler('notifications-service'))
+app.use(errorHandler('notifications-service'))
 
 const PORT = process.env.NOTIFICATIONS_PORT || 4006
 

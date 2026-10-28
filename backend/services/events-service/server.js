@@ -3,6 +3,8 @@ import dotenv from 'dotenv'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { checkConnection } from '../../shared/db.js'
+import { errorHandler, notFoundHandler } from '../../shared/http.js'
+import { authenticate } from '../../shared/auth.js'
 import eventRoutes from './src/routes/eventRoutes.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -15,9 +17,10 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', service: 'events-service' })
 })
 
-app.use('/api/events', eventRoutes)
+app.use('/api/events', authenticate, eventRoutes)
 
-app.use((req, res) => res.status(404).json({ message: 'Ruta no encontrada en events-service.' }))
+app.use(notFoundHandler('events-service'))
+app.use(errorHandler('events-service'))
 
 const PORT = process.env.EVENTS_PORT || 4005
 
