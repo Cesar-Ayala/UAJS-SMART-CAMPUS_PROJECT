@@ -11,6 +11,20 @@ Este repositorio contiene:
   a MySQL. Expone endpoints para usuarios, solicitudes, reservas, recursos, eventos y
   notificaciones.
 
+## Integrantes
+
+| Nombre | Rol |
+|---|---|
+| Cesar Ayala | Arquitectura, Frontend y Microservicios |
+| Willinton Benavides | Backend, Documentacion y Correcciones |
+
+
+
+## Enlaces
+
+- **Repositorio:** https://github.com/Cesar-Ayala/UAJS-SMART-CAMPUS_PROJECT
+- **Tablero ClickUp:** https://app.clickup.com/90171490354/v/f/901710754544
+
 ## Arquitectura
 
 ```
