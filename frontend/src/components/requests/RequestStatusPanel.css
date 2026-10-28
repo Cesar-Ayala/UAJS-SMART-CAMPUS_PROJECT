@@ -1,0 +1,98 @@
+.status-panel {
+  margin-top: 32px;
+  padding: 18px 20px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
+}
+
+.status-panel__title {
+  margin: 0 0 12px;
+  font-size: 1.05rem;
+}
+
+.status-panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.status-panel__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.status-panel__label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.status-panel__input {
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.92rem;
+  resize: vertical;
+}
+
+.status-panel__input:focus-visible,
+.status-panel__button:focus-visible {
+  outline: 3px solid var(--color-primary-light);
+  outline-offset: 2px;
+}
+
+.status-panel__button {
+  padding: 10px 20px;
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.status-panel__button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.status-panel__button--primary {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.status-panel__button--primary:hover:not(:disabled) {
+  border-color: var(--color-primary-light);
+  background: var(--color-primary-light);
+}
+
+.status-panel__button--danger {
+  border-color: var(--color-danger);
+  background: var(--color-danger);
+  color: #fff;
+}
+
+.status-panel__button--danger:hover:not(:disabled) {
+  filter: brightness(0.92);
+}
+
+.status-panel__button--secondary {
+  border-color: var(--color-border);
+  background: transparent;
+  color: var(--color-text);
+}
+
+.status-panel__button--secondary:hover:not(:disabled) {
+  background: var(--color-bg);
+}
+
+.status-panel__error {
+  margin: 12px 0 0;
+  font-size: 0.9rem;
+  color: var(--color-danger);
+}

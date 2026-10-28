@@ -1,0 +1,105 @@
+.reservation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 520px;
+  padding: 20px 22px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
+}
+
+.reservation-form__title {
+  margin: 0;
+  font-size: 1.15rem;
+  color: var(--color-primary);
+}
+
+.reservation-form__meta {
+  margin: -10px 0 0;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.reservation-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.reservation-form__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.reservation-form__input {
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.92rem;
+}
+
+.reservation-form__input:focus-visible {
+  outline: 3px solid var(--color-primary-light);
+  outline-offset: 1px;
+}
+
+.reservation-form__input:disabled {
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+.reservation-form__error {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-danger);
+}
+
+.reservation-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.reservation-form__submit {
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.reservation-form__submit:hover:not(:disabled) {
+  background: var(--color-primary-light);
+}
+
+.reservation-form__cancel {
+  padding: 12px 20px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.reservation-form__cancel:hover:not(:disabled) {
+  background: var(--color-bg);
+}
+
+.reservation-form__submit:focus-visible,
+.reservation-form__cancel:focus-visible {
+  outline: 3px solid var(--color-primary-light);
+  outline-offset: 2px;
+}
+
+.reservation-form__submit:disabled,
+.reservation-form__cancel:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

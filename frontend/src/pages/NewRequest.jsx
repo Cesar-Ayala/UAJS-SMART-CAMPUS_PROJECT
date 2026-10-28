@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, useSearchParams, Link } from 'react-router-dom'
 import { endpoints } from '../api/client.js'
 import './NewRequest.css'
 
@@ -20,7 +20,9 @@ const initialForm = {
 
 export default function NewRequest() {
   const navigate = useNavigate()
-  const [form, setForm] = useState(initialForm)
+  const [searchParams] = useSearchParams()
+  // Si llega ?tipo=... (por ejemplo desde PQRS), el tipo queda precargado.
+  const [form, setForm] = useState(() => ({ ...initialForm, tipo: searchParams.get('tipo') || '' }))
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(null)
 

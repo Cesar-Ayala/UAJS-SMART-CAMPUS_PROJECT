@@ -13,6 +13,9 @@ export const pool = mysql.createPool({
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || '',
   database: process.env.DB_NAME || 'uajs_smart_campus',
+  // Las columnas DATE se devuelven como texto 'AAAA-MM-DD' y no como objetos Date:
+  // así la fecha no se corre un día según la zona horaria del servidor.
+  dateStrings: ['DATE'],
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0

@@ -3,6 +3,8 @@ import dotenv from 'dotenv'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { checkConnection } from '../../shared/db.js'
+import { errorHandler, notFoundHandler } from '../../shared/http.js'
+import { authenticate } from '../../shared/auth.js'
 import userRoutes from './src/routes/userRoutes.js'
 import authRoutes from './src/routes/authRoutes.js'
 
@@ -18,9 +20,10 @@ app.get('/health', (req, res) => {
 
 // Montadas bajo /api/users porque así llegan reenviadas desde el API Gateway
 app.use('/api/users/auth', authRoutes)
-app.use('/api/users', userRoutes)
+app.use('/api/users', authenticate, userRoutes)
 
-app.use((req, res) => res.status(404).json({ message: 'Ruta no encontrada en users-service.' }))
+app.use(notFoundHandler('users-service'))
+app.use(errorHandler('users-service'))
 
 const PORT = process.env.USERS_PORT || 4001
 

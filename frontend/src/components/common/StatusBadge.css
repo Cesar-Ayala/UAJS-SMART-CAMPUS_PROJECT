@@ -10,3 +10,4 @@
 .status-badge--info { background: #dbe8fb; color: var(--color-primary-light); }
 .status-badge--warning { background: #fbf0d6; color: var(--color-warning); }
 .status-badge--success { background: #dcf3e4; color: var(--color-success); }
+.status-badge--danger { background: #fbe3e1; color: var(--color-danger); }

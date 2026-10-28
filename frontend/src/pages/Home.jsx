@@ -1,5 +1,6 @@
 import useFetch from '../hooks/useFetch.js'
 import { endpoints } from '../api/client.js'
+import { useUser } from '../context/UserContext.jsx'
 import {
   mockServices,
   mockRequests,
@@ -10,10 +11,10 @@ import {
 import ServiceCard from '../components/cards/ServiceCard.jsx'
 import DashboardPanel from '../components/dashboard/DashboardPanel.jsx'
 import Loader from '../components/common/Loader.jsx'
+import './Home.css'
 
 export default function Home() {
-  // El catálogo de "servicios" (tarjetas del panel) es un dato de UI local,
-  // no proviene de un microservicio: no es uno de los 6 exigidos en el Entregable 1.
+  const { user } = useUser()
   const services = mockServices
 
   const { data: requests, loading } = useFetch(endpoints.requests, mockRequests, [])
@@ -21,28 +22,50 @@ export default function Home() {
   const { data: notifications } = useFetch(endpoints.notifications, mockNotifications, [])
   const { data: events } = useFetch(endpoints.events, mockEvents, [])
 
+  const nombreUsuario = user?.nombre || 'Estudiante'
+  const rolUsuario = user?.rol || 'Ingeniería de Sistemas'
+
   return (
-    <div>
-      <h1 className="page__title">Panel principal</h1>
-      <p className="page__subtitle">Consulta tus servicios universitarios en un solo lugar.</p>
-
-      <DashboardPanel
-        requests={requests}
-        reservations={reservations}
-        notifications={notifications}
-        events={events}
-      />
-
-
-      {loading ? (
-        <Loader label="Cargando..." />
-      ) : (
-        <div className="grid">
-          {services.map((service) => (
-            <ServiceCard key={service.id} service={service} />
-          ))}
+    <div className="home-container">
+      {/* Banner de Bienvenida */}
+      <section className="welcome-banner">
+        <div className="welcome-banner__content">
+          <span className="welcome-banner__badge">UAJS Smart Campus</span>
+          <h1 className="welcome-banner__title">¡Hola, {nombreUsuario}! </h1>
+          <p className="welcome-banner__subtitle">
+            Bienvenido a tu portal de servicios universitarios ({rolUsuario}). Consulta tus trámites, reservas y actividades en un solo lugar.
+          </p>
         </div>
-      )}
+      </section>
+
+      {/* Resumen de Estadísticas / Widgets */}
+      <section className="dashboard-section">
+        <h2 className="section-title">Resumen de Actividad</h2>
+        <DashboardPanel
+          requests={requests}
+          reservations={reservations}
+          notifications={notifications}
+          events={events}
+        />
+      </section>
+
+      {/* Servicios Disponibles / Accesos Directos */}
+      <section className="services-section">
+        <div className="services-header">
+          <h2 className="section-title">Servicios Universitarios</h2>
+          <span className="services-count">{services.length} Módulos activos</span>
+        </div>
+
+        {loading ? (
+          <Loader label="Cargando servicios del campus..." />
+        ) : (
+          <div className="services-grid">
+            {services.map((service) => (
+              <ServiceCard key={service.id} service={service} />
+            ))}
+          </div>
+        )}
+      </section>
     </div>
   )
 }

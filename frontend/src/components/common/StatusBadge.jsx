@@ -8,7 +8,9 @@ const STATUS_MODIFIER = {
   'Confirmada': 'status-badge--warning',
   'Pendiente': 'status-badge--neutral',
   'Resuelta': 'status-badge--success',
-  'Cerrada': 'status-badge--success'
+  'Cerrada': 'status-badge--success',
+  'Rechazada': 'status-badge--danger',
+  'Cancelada': 'status-badge--danger'
 }
 
 export default function StatusBadge({ status }) {

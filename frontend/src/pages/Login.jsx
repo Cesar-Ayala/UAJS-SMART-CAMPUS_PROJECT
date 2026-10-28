@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { useUser } from '../context/UserContext.jsx'
 import './Login.css'
 
-// Credenciales de prueba (ver backend/database/schema.sql).
+// Credenciales de prueba (ver backend/database/seed.sql).
 // El botón de cada perfil solo rellena el formulario; sigue
 // pasando por el login real del backend al enviar.
 const TEST_ACCOUNTS = [
   { label: '🎓 Estudiante', correo: 'estudiante@uajs.edu.co', password: 'estudiante123' },
   { label: '🧑‍🏫 Docente', correo: 'docente@uajs.edu.co', password: 'docente123' },
+  { label: '🗂️ Administrativo', correo: 'administrativo@uajs.edu.co', password: 'administrativo123' },
   { label: '⚙️ Administrador', correo: 'admin@uajs.edu.co', password: 'admin123' }
 ]
 
@@ -45,61 +46,80 @@ export default function Login() {
   }
 
   return (
-    <div className="login">
-      <div className="login__card">
-        <h1 className="login__title">UAJS Smart Campus</h1>
-        <p className="login__subtitle">
-          Inicia sesión para acceder a la plataforma de servicios universitarios.
-        </p>
+    <div className="login-container">
+      <section className="login-hero">
+        <div className="login-hero__content">
+          <span className="login-hero__tag">Plataforma institucional</span>
+          <h1 className="login-hero__title">Los servicios de la universidad, en un solo lugar</h1>
+          <p className="login-hero__description">
+            Registra solicitudes, reserva salas y equipos, consulta eventos y recibe avisos
+            sobre tus trámites sin pasar por varias plataformas.
+          </p>
+        </div>
+      </section>
 
-        <form className="login__form" onSubmit={handleSubmit}>
-          <label className="login__field">
-            <span className="login__label">Correo institucional</span>
-            <input
-              className="login__input"
-              type="email"
-              value={correo}
-              onChange={(e) => setCorreo(e.target.value)}
-              placeholder="tucorreo@uajs.edu.co"
-              required
-            />
-          </label>
+      <main className="login-form-wrapper">
+        <div className="login-card">
+          <div className="login-card__header">
+            <h2>Iniciar sesión</h2>
+            <p>Ingresa con tu correo institucional para acceder a UAJS Smart Campus.</p>
+          </div>
 
-          <label className="login__field">
-            <span className="login__label">Contraseña</span>
-            <input
-              className="login__input"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              required
-            />
-          </label>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="login-correo">Correo institucional</label>
+              <input
+                id="login-correo"
+                type="email"
+                value={correo}
+                onChange={(e) => setCorreo(e.target.value)}
+                placeholder="tucorreo@uajs.edu.co"
+                autoComplete="username"
+                required
+              />
+            </div>
 
-          {error && <p className="login__error">{error}</p>}
+            <div className="form-group">
+              <label htmlFor="login-password">Contraseña</label>
+              <input
+                id="login-password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                autoComplete="current-password"
+                required
+              />
+            </div>
 
-          <button type="submit" className="login__submit" disabled={loading}>
-            {loading ? 'Ingresando...' : 'Iniciar sesión'}
-          </button>
-        </form>
+            {error && (
+              <p className="login-card__error" role="alert">
+                {error}
+              </p>
+            )}
 
-        <div className="login__test-accounts">
-          <p className="login__test-label">Cuentas de prueba (clic para rellenar):</p>
-          <div className="login__test-buttons">
-            {TEST_ACCOUNTS.map((account) => (
-              <button
-                key={account.correo}
-                type="button"
-                className="login__test-btn"
-                onClick={() => fillTestAccount(account)}
-              >
-                {account.label}
-              </button>
-            ))}
+            <button type="submit" className="login-btn" disabled={loading}>
+              {loading ? 'Ingresando...' : 'Iniciar sesión'}
+            </button>
+          </form>
+
+          <div className="test-accounts">
+            <p className="test-accounts__label">Cuentas de prueba (clic para rellenar)</p>
+            <div className="test-accounts__buttons">
+              {TEST_ACCOUNTS.map((account) => (
+                <button
+                  key={account.correo}
+                  type="button"
+                  className="test-account-btn"
+                  onClick={() => fillTestAccount(account)}
+                >
+                  {account.label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   )
 }
