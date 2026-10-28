@@ -7,19 +7,7 @@ Plataforma web distribuida para la gestión y articulación de servicios univers
 (solicitudes, reservas, recursos, eventos y notificaciones) de la Corporación Universitaria
 Antonio José de Sucre (UAJS).
 
-## Integrante
 
-| Nombre | Rol |
-|---|---|
-| Cesar Ayala | Arquitectura, Frontend y Microservicios |
-| Willinton Benavides | Backend |
-
-
-
-## Enlaces
-
-- **Repositorio:** https://github.com/Cesar-Ayala/UAJS-SMART-CAMPUS_PROJECT
-- **Tablero ClickUp:** https://app.clickup.com/90171490354/v/f/901710754544
 
 ## Integrantes
 
